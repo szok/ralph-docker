@@ -1,4 +1,4 @@
-FROM      base
+FROM allegrogroup/ralph:base
 MAINTAINER PyLabs pylabs@allegrogroup.com
 
 USER ralph
@@ -16,5 +16,5 @@ RUN echo "test:pass"|chpasswd
 ADD snmpd /etc/default/snmpd
 
 EXPOSE 8000 22
- 
+
 CMD ["/root/start.sh"]

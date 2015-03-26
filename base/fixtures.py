@@ -111,12 +111,12 @@ rack_server_model = AssetModelFactory(
 )
 blade_chassis_model = AssetModelFactory(
     name='blade-chassis', category=blade_chassis_category, height_of_device=10,
-    visualization_layout=ModelVisualizationLayout.layout_2x8,
+    visualization_layout_front=ModelVisualizationLayout.layout_2x8,
 )
 blade_chassis_ab_model = AssetModelFactory(
     name='blade-chassis-ab', category=blade_chassis_category,
     height_of_device=10,
-    visualization_layout=ModelVisualizationLayout.layout_2x8AB,
+    visualization_layout_front=ModelVisualizationLayout.layout_2x8AB,
 )
 blade_server_model = AssetModelFactory(
     name='blade-server', category=blade_server_category,

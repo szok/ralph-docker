@@ -14,19 +14,22 @@ if [ "$1" = "clean" ]; then
 	docker stop $(sudo docker ps -a -q) || true
 fi
 
-if [ "$#" -lt "2" ]; then 
+if [ "$#" -lt "2" ]; then
 	die "Usage: build.sh [clean] [build <instance>]"
 fi
 
 instance="$2"
 image_name=$instance
 
-if [ "$instance" == "os" ]; then 
-	image_name="vi4m/ralph:latest"
+if [ "$instance" == "os" ]; then
+	image_name="allegrogroup/ralph:latest"
 fi
-	
+if [ "$instance" == "base" ]; then
+    image_name="allegrogroup/ralph:base"
+fi
+
 if [ "$1" = "build" ]; then
-	./$instance/build.sh 
+	docker build -t="${image_name}" ${instance}
 fi
 
 if [ "$1" = "debug" ]; then
