@@ -1,0 +1,39 @@
+# Generated dynamic docker images settings
+
+REPOSITORIES_TYPES = {
+    'github': 'https://github.com/%(fork)s/%(repo_name)s.git -b %(branch)s',
+}
+
+# Repositories list
+REPOSITORIES = [
+    {
+        'repo_name': 'ralph_assets',
+        'owner': 'allegro',
+        'type': 'github',
+        'default_branch': 'develop'
+    },
+    {
+        'repo_name': 'bob-ajax-selects',
+        'owner': 'quamilek',
+        'type': 'github',
+        'default_branch': 'develop'
+    },
+    {
+        'repo_name': 'django-bob',
+        'owner': 'allegro',
+        'type': 'github',
+        'default_branch': 'develop'
+    },
+    {
+        'repo_name': 'ralph',
+        'owner': 'allegro',
+        'type': 'github',
+        'default_branch': 'develop'
+    },
+    {
+        'repo_name': 'ralph_pricing',
+        'owner': 'allegro',
+        'type': 'github',
+        'default_branch': 'develop'
+    },
+]

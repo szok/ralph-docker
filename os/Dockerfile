@@ -15,6 +15,7 @@ RUN echo "test:pass"|chpasswd
 
 ADD snmpd /etc/default/snmpd
 
-EXPOSE 8000 22
+
+EXPOSE 22 8000
 
 CMD ["/root/start.sh"]
