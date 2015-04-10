@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+cd /home/ralph
+. bin/activate
+mkdir sources/
+cd sources/
+
+{git_clone}
+
+
+for i in {make_list}
+do
+    echo "$i";
+    cd /home/ralph/sources/$i;
+    make install;
+done

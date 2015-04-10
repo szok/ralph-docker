@@ -18,18 +18,27 @@ if [ "$#" -lt "2" ]; then
 	die "Usage: build.sh [clean] [build <instance>]"
 fi
 
+SCRIPT_PATH=$(dirname `which $0`)
+
 instance="$2"
 image_name=$instance
+docker_dest_port=${DOCKER_DEST_PORT:="8000"}
 
 if [ "$instance" == "os" ]; then
-	image_name="allegrogroup/ralph:latest"
+    tag=${DOCKER_OS_TAG:="latest"}
+    image_name="allegrogroup/ralph:${tag}"
 fi
 if [ "$instance" == "base" ]; then
-    image_name="allegrogroup/ralph:base"
+    base_tag=${DOCKER_BASE_TAG:="base"}
+    image_name="allegrogroup/ralph:${base_tag}"
 fi
 
 if [ "$1" = "build" ]; then
-	docker build -t="${image_name}" ${instance}
+    if [ "$instance" == "base" ]; then
+        python ${SCRIPT_PATH}/build_files.py
+    fi
+	docker build -t="${image_name}" ${SCRIPT_PATH}/${instance}
+    echo "Done"
 fi
 
 if [ "$1" = "debug" ]; then
@@ -39,7 +48,8 @@ fi
 if [ "$1" = "start" ]; then
 	docker stop -t 1 ${instance}  2> /dev/null || true
 	docker rm ${instance}  2>/dev/null || true
-	docker run -d --name ${instance} --mac-address=02:42:ac:11:ff:ff -p 8000:8000 -t -i --volumes-from ${instance}_storage ${image_name} $3 $4 $5 $6 $7 $8
+
+    docker run -d --name ${instance} --mac-address=02:42:ac:11:ff:ff -p ${docker_dest_port}:8000 -t -i --volumes-from ${instance}_storage ${image_name} $3 $4 $5 $6 $7 $8
 fi
 
 if [ "$1" = "stop" ]; then
@@ -65,4 +75,5 @@ if [ "$1" = "init" ]; then
     docker run -i -t --name ${instance}_storage -v /var/lib/mysql -v /home/ralph/.ralph busybox /bin/sh -c "chown default /home/ralph; chown default /home/ralph/.ralph"
     echo 'init ralph...'
     docker run --rm=true --name ${instance} -i --volumes-from ${instance}_storage ${image_name} /bin/bash /home/ralph/init.sh
+    echo "Done"
 fi
