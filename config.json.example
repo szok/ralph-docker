@@ -1,0 +1,41 @@
+{
+    "GITHUB": {
+        "api_key": "YOUR API KEY",
+        "url_pull_requests": "https://api.github.com/repos/{owner}/{repo_name}/pulls"
+    },
+    "REPOSITORIES_TYPES": {
+        "github": "https://github.com/%(fork)s/%(repo_name)s.git -b %(branch)s"
+    },
+    "REPOSITORIES": [
+        {
+            "owner": "allegro",
+            "default_branch": "develop",
+            "type": "github",
+            "repo_name": "ralph_assets"
+        },
+        {
+            "owner": "quamilek",
+            "default_branch": "develop",
+            "type": "github",
+            "repo_name": "bob-ajax-selects"
+        },
+        {
+            "owner": "allegro",
+            "default_branch": "develop",
+            "type": "github",
+            "repo_name": "django-bob"
+        },
+        {
+            "owner": "allegro",
+            "default_branch": "develop",
+            "type": "github",
+            "repo_name": "ralph"
+        },
+        {
+            "owner": "allegro",
+            "default_branch": "develop",
+            "type": "github",
+            "repo_name": "ralph_pricing"
+        }
+    ]
+}
