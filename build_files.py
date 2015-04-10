@@ -2,16 +2,19 @@
 Generated base/Dockerfile and os/build.sh from files templates
 """
 import os
-
-import config
+import json
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+with open(os.path.join(BASE_DIR, 'config.json'), 'r') as file_obj:
+    config = json.load(file_obj)
+
+
 def save_build_sh(build_sh_conf):
     git_clone_lines = []
     for conf in build_sh_conf:
-        url = 'git clone {}'.format(config.REPOSITORIES_TYPES[conf['type']])
+        url = 'git clone {}'.format(config['REPOSITORIES_TYPES'][conf['type']])
         git_clone_lines.append(url % conf)
 
     with open(os.path.join(BASE_DIR, 'build.sh.tmpl'), 'r') as file_obj:
@@ -26,7 +29,7 @@ def save_build_sh(build_sh_conf):
 
 def main():
     build_sh_conf = []
-    for repo in config.REPOSITORIES:
+    for repo in config['REPOSITORIES']:
         fork = "{}_FORK".format(repo['repo_name'].upper())
         branch = "{}_BRANCH".format(repo['repo_name'].upper())
         fork = os.environ.get(fork, repo['owner'])

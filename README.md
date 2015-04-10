@@ -2,6 +2,43 @@
 
 Build docker container to Ralph application
 
+Before running the script, you must change the configuration file.
+
+Rename file config.json.example to config.json and chnage it:
+
+```
+"REPOSITORIES_TYPES": {
+    "github": "https://github.com/%(fork)s/%(repo_name)s.git -b% (branch) s"
+}
+```
+Set the url to clone repositories
+
+In the key REPOSITORIES are all repositories that cloning at startup image
+```
+{
+    "owner": "allegro"
+    "default_branch": "develop"
+    "type": "github"
+    "repo_name": "django-bob"
+}
+```
+
+owner - username from Github
+default_branch - default name of branch
+type - github (url from REPOSITORIES_TYPES)
+repo_name - the name of the repository
+
+You can change the settings before starting for each repository by environmental variables
+
+```
+export RALPH_FORK = 'my_fork'
+export RALPH_BRANCH = 'my_branch'
+```
+
+Then the image of Docker will be built with your changes
+
+
+
 Build docker base image. Base image has the all packages to run Ralph:
 ```
 sudo ./run.sh build base
