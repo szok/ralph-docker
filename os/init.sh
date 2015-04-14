@@ -21,7 +21,8 @@ echo "GRANT ALL ON ralph.* TO ralph@'%' IDENTIFIED BY 'ralph'; FLUSH PRIVILEGES"
 /home/ralph/bin/ralph shell < /home/ralph/createsuperuser.py
 DJANGO_SETTINGS_MODULE=ralph.settings /home/ralph/bin/ralph make_demo_data -d assets_dc_assets -d relations
 /home/ralph/bin/ralph collectstatic -l --noinput
-/home/ralph/bin/ralph scrooge_sync
+# sync scrooge for last month
+for i in {0..31}; do /home/ralph/bin/ralph scrooge_sync --today=`python -c "from datetime import timedelta, date; print(date.today() - timedelta(days=$i))"`; done
 mysqladmin shutdown
 
 chgrp -R ralph /home/ralph && chown -R ralph /home/ralph
