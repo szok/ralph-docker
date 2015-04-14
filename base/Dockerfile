@@ -9,7 +9,6 @@ ENV HOME /home/ralph
 USER ralph
 RUN virtualenv /home/ralph/ && /home/ralph/bin/pip install pip==1.5.6 && /home/ralph/bin/pip install setuptools==3.6 && mkdir /home/ralph/.ralph
 
-ADD fixtures.py /home/ralph/fixtures.py
 ONBUILD ADD build.sh /home/ralph/build.sh
 ONBUILD RUN chmod 777 /home/ralph/build.sh
 ONBUILD USER root
