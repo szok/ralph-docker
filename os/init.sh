@@ -19,7 +19,7 @@ echo "GRANT ALL ON ralph.* TO ralph@'%' IDENTIFIED BY 'ralph'; FLUSH PRIVILEGES"
 /home/ralph/bin/ralph migrate --fake
 /home/ralph/bin/ralph createsuperuser ralph --noinput --user ralph --email ralph@allegrogroup.com
 /home/ralph/bin/ralph shell < /home/ralph/createsuperuser.py
-DJANGO_SETTINGS_MODULE=ralph.settings /home/ralph/bin/ralph make_demo_data -d assets_dc_assets -d relations
+DJANGO_SETTINGS_MODULE=ralph.settings /home/ralph/bin/ralph make_demo_data
 /home/ralph/bin/ralph collectstatic -l --noinput
 /home/ralph/bin/ralph scrooge_sync
 mysqladmin shutdown
