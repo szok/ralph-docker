@@ -2,10 +2,10 @@ FROM allegrogroup/ralph:base
 MAINTAINER PyLabs pylabs@allegrogroup.com
 
 USER ralph
-ADD createsuperuser.py /home/ralph/createsuperuser.py
-ADD init.sh /home/ralph/init.sh
-ADD upgrade_ralph.sh /home/ralph/upgrade_ralph.sh
-ADD additional-settings.py /home/ralph/additional-settings.py
+ADD createsuperuser.py /root/createsuperuser.py
+ADD init.sh /root/init.sh
+#ADD upgrade_ralph.sh /home/ralph/upgrade_ralph.sh
+#ADD additional-settings.py /home/ralph/additional-settings.py
 
 USER root
 ADD start.sh /root/start.sh

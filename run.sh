@@ -72,10 +72,11 @@ if [ "$1" = "upgrade" ]; then
 fi
 
 if [ "$1" = "init" ]; then
+    cp os/init.sh test/init.sh
     echo 'stopping processes...'
     docker stop ${instance_name}  2>/dev/null || true
     echo 'init storage...'
-    docker run -i -t --name ${storage_name} -v /var/lib/mysql -v /home/ralph/.ralph busybox /bin/sh -c "chown default /home/ralph; chown default /home/ralph/.ralph"
+    docker run -i -t --name ${storage_name} -v /Users/piotrjarolewski/allegro/ralph-docker/test:/home/ralph -v /var/lib/mysql -v /home/ralph/.ralph busybox /bin/sh -c "chown default /home/ralph; chown default /home/ralph/.ralph"
     echo 'init ralph...'
     docker run --rm=true --name ${instance_name} -i --volumes-from ${storage_name} ${image_name} /bin/bash /home/ralph/init.sh
     echo "Done"
